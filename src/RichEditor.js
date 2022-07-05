@@ -30,7 +30,7 @@ export default class RichTextEditor extends Component {
         useContainer: true,
         pasteAsPlainText: false,
         autoCapitalize: 'off',
-        defaultParagraphSeparator: 'div',
+        defaultParagraphSeparator: '',
         editorInitializedCallback: () => {},
         initialHeight: 0,
     };
@@ -74,12 +74,12 @@ export default class RichTextEditor extends Component {
                     html ||
                     createHTML({
                         backgroundColor,
-                        color,
+                        color:"black",
                         caretColor,
                         placeholderColor,
-                        initialCSSText,
-                        cssText,
-                        contentCSSText,
+                        initialCSSText:"black",
+                        cssText:"color:black",
+                        contentCSSText:'font-size: 16px; min-height: 200px; color:black',
                         pasteAsPlainText,
                         pasteListener: !!onPaste,
                         keyUpListener: !!onKeyUp,
@@ -268,7 +268,7 @@ export default class RichTextEditor extends Component {
                     keyboardDisplayRequiresUserAction={false}
                     nestedScrollEnabled={!useContainer}
                     style={[styles.webview, style]}
-                    {...rest}
+                    
                     ref={that.setRef}
                     onMessage={that.onMessage}
                     originWhitelist={['*']}
@@ -278,6 +278,7 @@ export default class RichTextEditor extends Component {
                     javaScriptEnabled={true}
                     source={viewHTML}
                     onLoad={that.init}
+                    {...rest}
                 />
                 {Platform.OS === 'android' && <TextInput ref={ref => (that._input = ref)} style={styles._input} />}
             </>
